@@ -3,6 +3,7 @@ import java.awt.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Properties;
 
 public class QuizClient {
     private Socket socket;
@@ -17,10 +18,10 @@ public class QuizClient {
     private JLabel feedbackLabel; // 왼쪽 아래
     private JLabel scoreLabel;    // 오른쪽 아래
 
-    public QuizClient() {
+    public QuizClient(String serverAddress, int serverPort) {
         try {
             // 서버와 연결
-            socket = new Socket("localhost", 1234);
+            socket = new Socket(serverAddress, serverPort);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -150,6 +151,21 @@ public class QuizClient {
     }
 
     public static void main(String[] args) {
-        new QuizClient();
+        try {
+            // 설정 파일에서 서버 주소와 포트 읽기
+            Properties properties = new Properties();
+            try (FileInputStream input = new FileInputStream("config.properties")) {
+                properties.load(input);
+            }
+            String serverAddress = properties.getProperty("serverAddress");
+            int serverPort = Integer.parseInt(properties.getProperty("serverPort"));
+
+            // QuizClient 실행
+            new QuizClient(serverAddress, serverPort);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to load configuration: " + e.getMessage(),
+                    "Configuration Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
