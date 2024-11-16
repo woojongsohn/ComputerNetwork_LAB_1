@@ -30,14 +30,14 @@ public class QuizServer {
 
     // 퀴즈 저장
     private static void initializeQuestions() {
-        questionPool.add(new Question("What is the capital of France?", "Paris"));
-        questionPool.add(new Question("What is 5 + 7?", "12"));
+        questionPool.add(new Question("What is the capital of KOREA?", "Seoul"));
+        questionPool.add(new Question("What is ?", "12"));
         questionPool.add(new Question("Who wrote 'Hamlet'?", "Shakespeare"));
         questionPool.add(new Question("What is the chemical symbol for water?", "H2O"));
-        questionPool.add(new Question("What is 2 * 6?", "12"));
+        questionPool.add(new Question("What is 5 * 6?", "30"));
         questionPool.add(new Question("What is the smallest prime number?", "2"));
-        questionPool.add(new Question("What is the currency of Japan?", "Yen"));
-        questionPool.add(new Question("Who painted the Mona Lisa?", "Da Vinci"));
+        questionPool.add(new Question("What is the capital of Japan?", "Tokyo"));
+        questionPool.add(new Question("Who painted the Mona Lisa?", "da Vinci"));
     }
 
     // 랜덤으로 n개의 질문 선택
